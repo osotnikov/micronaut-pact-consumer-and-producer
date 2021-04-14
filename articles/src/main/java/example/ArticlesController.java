@@ -31,6 +31,6 @@ public class ArticlesController {
 
     @Get(uri = "/articles", produces = MediaType.TEXT_PLAIN)
     public HttpResponse<String> getArticle(@NotBlank String key) {
-        return HttpResponse.ok(articlesRepository.get(key));
+        return HttpResponse.ok(articlesRepository.get(key) == null ? " ": articlesRepository.get(key));
     }
 }
