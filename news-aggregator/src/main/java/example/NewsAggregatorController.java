@@ -1,5 +1,6 @@
 package example;
 
+import example.articles.service.client.ArticlesClient;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
@@ -7,6 +8,7 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.validation.Validated;
 
+import javax.inject.Inject;
 import javax.validation.constraints.NotBlank;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,21 +18,13 @@ import java.util.Set;
 @Validated
 public class NewsAggregatorController {
 
-    private final static Set<String> ALLOWED_KEYS = Set.of("latest", "most_popular");
-    private static Map<String, String> articlesRepository = new HashMap<>();
+    @Inject
+    protected ArticlesClient customerClient;
 
-    @Post(uri = "/articles", consumes = MediaType.APPLICATION_JSON)
-    public HttpResponse postArticle(@NotBlank String key, @NotBlank String content) {
-        if(ALLOWED_KEYS.contains(key)){
-            articlesRepository.put(key, content);
-            return HttpResponse.ok();
-        } else {
-            return HttpResponse.badRequest();
-        }
-    }
+    @Get(uri = "/all-articles", produces = MediaType.TEXT_PLAIN)
+    public HttpResponse<String> getAllArticles() {
 
-    @Get(uri = "/articles", produces = MediaType.TEXT_PLAIN)
-    public HttpResponse<String> getArticle(@NotBlank String key) {
-        return HttpResponse.ok(articlesRepository.get(key));
+        return HttpResponse.ok(customerClient.getAllArticles().stream()
+                .reduce("", (str1, str2) -> str1 + " " +str2));
     }
 }
