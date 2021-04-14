@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@Controller("/")
+@Controller("/news-aggregator")
 @Validated
 public class NewsAggregatorController {
 
@@ -25,6 +25,6 @@ public class NewsAggregatorController {
     public HttpResponse<String> getAllArticles() {
 
         return HttpResponse.ok(customerClient.getAllArticles().stream()
-                .reduce("", (str1, str2) -> str1 + " " +str2));
+                .reduce("", (str1, str2) -> str1 + "\n" +str2));
     }
 }
