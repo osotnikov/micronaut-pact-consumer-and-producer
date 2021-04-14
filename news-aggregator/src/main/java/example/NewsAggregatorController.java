@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Controller("/")
 @Validated
-public class ArticlesController {
+public class NewsAggregatorController {
 
     private final static Set<String> ALLOWED_KEYS = Set.of("latest", "most_popular");
     private static Map<String, String> articlesRepository = new HashMap<>();
