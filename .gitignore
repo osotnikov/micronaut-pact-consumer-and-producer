@@ -25,3 +25,7 @@ hs_err_pid*
 /.gradle/
 /*/build/
 */build/
+/articles/.gradle/
+/articles/build/
+/news-aggregator/.gradle/
+/news-aggregator/build/
