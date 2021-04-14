@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "75971e18-3886-46b3-96e5-8466ead50cf6",
+		"name": "micronaut-pact-example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "articles-service",
+			"item": [
+				{
+					"name": "valid post article 0",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"key\": \"latest\",\n    \"content\": \"Perseverance Landing - February 18, 2021\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/articles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"articles"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "latest",
+									"disabled": true
+								},
+								{
+									"key": "content",
+									"value": "Perseverance Landing - February 18, 2021",
+									"disabled": true
+								}
+							]
+						},
+						"description": "post article"
+					},
+					"response": []
+				},
+				{
+					"name": "valid post article 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"key\": \"most_popular\",\n    \"content\": \"Govt set to finalise changes to vaccination programme - April 14, 2021\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/articles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"articles"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "latest",
+									"disabled": true
+								},
+								{
+									"key": "content",
+									"value": "Perseverance Landing - February 18, 2021",
+									"disabled": true
+								}
+							]
+						},
+						"description": "post article"
+					},
+					"response": []
+				},
+				{
+					"name": "get article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "invalid post article",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"key\": \"oldest\",\n    \"content\": \"Perseverance Landing - February 18, 2021\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/articles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"articles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "news-aggregator-service",
+			"item": [
+				{
+					"name": "get all articles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/news-aggregator/all-articles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"news-aggregator",
+								"all-articles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
