@@ -26,8 +26,10 @@ public class ArticlesClientPactConsumerTest {
 
     @Pact(provider = "articles", consumer = "news-aggregator")
     public RequestResponsePact pact(PactDslWithProvider builder) {
+        // stubbing
         return builder
-                .given("article exists for key=latest")
+                .given("article exists for key=latest") // This state will have to be prepared by the provider
+                // before verifying this contract(stub)
                     .uponReceiving("test get article with key=latest")
                     .method("GET")
                     .path("/articles")
@@ -41,6 +43,7 @@ public class ArticlesClientPactConsumerTest {
     @Test
     @PactTestFor(providerName = "articles", hostInterface = "localhost", port = "8080")
     public void testFoo1() {
+        // testing
         assertEquals(EXPECTED_ARTICLE_CONTENT, articlesClient.getArticleContent("latest"));
     }
 }
