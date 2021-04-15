@@ -35,6 +35,11 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api"
     testImplementation "io.micronaut.test:micronaut-test-junit5"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+    // pact
+    compile 'au.com.dius:pact-jvm-consumer-junit5_2.12:3.6.10'
+    compile 'au.com.dius:pact-jvm-provider-junit5_2.12:3.6.10'
+    // client for target example
+    compile 'io.micronaut:micronaut-http-client'
 }
 
 test.classpath += configurations.developmentOnly

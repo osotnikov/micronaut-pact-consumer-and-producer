@@ -17,7 +17,7 @@ import java.util.Set;
 public class ArticlesController {
 
     private final static Set<String> ALLOWED_KEYS = Set.of("latest", "most_popular");
-    private static Map<String, String> articlesRepository = new HashMap<>();
+    private Map<String, String> articlesRepository = new HashMap(Map.of("test","test content"));
 
     @Post(uri = "/articles", consumes = MediaType.APPLICATION_JSON)
     public HttpResponse postArticle(@NotBlank String key, @NotBlank String content) {
