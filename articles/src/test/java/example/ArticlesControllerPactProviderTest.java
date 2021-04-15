@@ -7,10 +7,15 @@ import au.com.dius.pact.provider.junit5.HttpTestTarget;
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
 import io.micronaut.context.ApplicationContext;
+import io.micronaut.http.HttpRequest;
+import io.micronaut.http.client.RxHttpClient;
 import io.micronaut.runtime.server.EmbeddedServer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 @Provider("articles")
 /** Uncomment this and comment @PactBroker instead to test locally by pasting a .json file for the contract under
@@ -23,9 +28,12 @@ public class ArticlesControllerPactProviderTest {
     // use mocks instead of certain beans e.g. for databases or message brokers...
     EmbeddedServer embeddedServer = ApplicationContext.run(EmbeddedServer.class);
 
+    RxHttpClient articlesClient;
+
     @BeforeEach
-    void before(PactVerificationContext context) {
+    void before(PactVerificationContext context) throws MalformedURLException {
         int port = embeddedServer.getPort();
+        articlesClient = RxHttpClient.create(new URL("http://localhost:" + port));
         context.setTarget(new HttpTestTarget("localhost", port, "/"));
     }
 
@@ -42,7 +50,8 @@ public class ArticlesControllerPactProviderTest {
     // these states (in given clauses) on the consumer side.
     @State("article exists for key=latest")
     public void sampleState() {
-        // TODO: need to make this add an entry for key=latest otherwise the pact verification will keep failing
-        System.out.println("I ran!");
+        articlesClient.exchange(HttpRequest.POST(
+                "/articles",
+                "{\"key\": \"latest\", \"content\": \"Perseverance Landing - February 18, 2021\"}")).blockingFirst();
     }
 }

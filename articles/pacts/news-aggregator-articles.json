@@ -32,9 +32,6 @@
       },
       "response": {
         "status": 200,
-        "headers": {
-          "Content-Type": "text/plain; charset\u003dISO-8859-1"
-        },
         "body": "Perseverance Landing - February 18, 2021"
       },
       "providerStates": [

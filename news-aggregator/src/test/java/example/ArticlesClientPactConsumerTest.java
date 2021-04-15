@@ -36,7 +36,7 @@ public class ArticlesClientPactConsumerTest {
                     .matchQuery("key", "latest")
                     .willRespondWith()
                     .status(200)
-                    .body(EXPECTED_ARTICLE_CONTENT, ContentType.TEXT_PLAIN)
+                    .body(EXPECTED_ARTICLE_CONTENT)
                 .toPact();
     }
 
